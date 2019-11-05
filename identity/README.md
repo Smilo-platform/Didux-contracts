@@ -7,6 +7,18 @@ This app is a working implementation of the [ERC 725](https://github.com/ethereu
 Using ERC 725, a smart contract can protect function calls from being executed unless the sender has a verified claim
 from a trusted issuer.
 
+## Tests
+
+```
+npm install
+npm run test
+```
+
+## Build contracts
+```
+npm run build:contracts
+```
+
 ## Explanation
 
 Imagine we want to deploy a Listing contract to sell a concert ticket, but only allow interactions from
