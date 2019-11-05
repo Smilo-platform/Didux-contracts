@@ -10,7 +10,6 @@
   },
   "scripts": {
     "test": "mocha -r @babel/register test -t 10000 --exit",
-    "test:watch": "mocha -r @babel/register -w --watch-extensions sol -t 5000 test",
     "build:contracts": "BUILD=1 mocha -r @babel/register -t 10000 test --exit"
   },
   "dependencies": {
