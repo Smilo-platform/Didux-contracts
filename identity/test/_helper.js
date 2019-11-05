@@ -93,7 +93,7 @@ export default async function testHelper(contracts, provider) {
 
     if (process.env.BUILD) {
       fs.writeFileSync(
-        __dirname + '/../src/contracts/' + contractName + '.js',
+        __dirname + '/../build/' + contractName + '.js',
         'module.exports = ' +
           JSON.stringify(
             {
