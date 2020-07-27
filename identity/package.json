@@ -16,7 +16,7 @@
     "@babel/core": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-plugin-module-resolver": "^3.1.1",
-    "ganache-core": "2.2.1",
+    "ganache-core": "2.10.2",
     "mocha": "^6.2.2",
     "solc": "^0.4.24",
     "web3": "^1.0.0-beta.36"

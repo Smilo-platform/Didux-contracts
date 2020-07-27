@@ -4,8 +4,8 @@ import './ClaimHolder.sol';
 
 contract ClaimVerifier {
 
-  event ClaimValid(ClaimHolder _identity, uint256 claimType);
-  event ClaimInvalid(ClaimHolder _identity, uint256 claimType);
+  event ClaimValid(ClaimHolder _identity, uint256 claimType, uint blockNumber);
+  event ClaimInvalid(ClaimHolder _identity, uint256 claimType, uint blockNumber);
 
   ClaimHolder public trustedClaimHolder;
 
@@ -13,20 +13,20 @@ contract ClaimVerifier {
     trustedClaimHolder = ClaimHolder(_trustedClaimHolder);
   }
 
-  function checkClaim(ClaimHolder _identity, uint256 claimType)
+  function checkClaim(ClaimHolder _identity, uint256 claimType, uint blockNumber)
     public
     returns (bool claimValid)
   {
-    if (claimIsValid(_identity, claimType)) {
-      emit ClaimValid(_identity, claimType);
+    if (claimIsValid(_identity, claimType, blockNumber)) {
+      emit ClaimValid(_identity, claimType, blockNumber);
       return true;
     } else {
-      emit ClaimInvalid(_identity, claimType);
+      emit ClaimInvalid(_identity, claimType, blockNumber);
       return false;
     }
   }
 
-  function claimIsValid(ClaimHolder _identity, uint256 claimType)
+  function claimIsValid(ClaimHolder _identity, uint256 claimType, uint blockNumber)
     public
     constant
     returns (bool claimValid)
@@ -38,7 +38,7 @@ contract ClaimVerifier {
     bytes memory data;
 
     // Construct claimId (identifier + claim type)
-    bytes32 claimId = keccak256(trustedClaimHolder, claimType);
+    bytes32 claimId = keccak256(trustedClaimHolder, claimType, blockNumber);
 
     // Fetch claim from user
     ( foundClaimType, scheme, issuer, sig, data, ) = _identity.getClaim(claimId);

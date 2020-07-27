@@ -39,7 +39,8 @@ contract Identity is ClaimHolder {
                 _issuer[i],
                 getBytes(_signature, offset, _sigSizes[i]),
                 getBytes(_data, doffset, dataSizes[i]),
-                getString(_uri, uoffset, uriSizes[i])
+                getString(_uri, uoffset, uriSizes[i]),
+                block.number
             );
 
             offset += _sigSizes[i];
@@ -53,7 +54,8 @@ contract Identity is ClaimHolder {
                 claims[claimId].issuer,
                 claims[claimId].signature,
                 claims[claimId].data,
-                claims[claimId].uri
+                claims[claimId].uri,
+                claims[claimId].blockNumber = block.number
             );
         }
     }

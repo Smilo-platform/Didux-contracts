@@ -29,7 +29,7 @@ describe('ClaimVerifier.sol', async function() {
 
   it('should not allow new listing without identity claim', async function() {
     var res = await ClaimVerifier.methods
-      .checkClaim(UserIdentity._address, 3)
+      .checkClaim(UserIdentity._address, 3, await web3.eth.getBlockNumber())
       .send({ from: accounts[0] })
     assert(res.events.ClaimInvalid)
   })
@@ -55,9 +55,8 @@ describe('ClaimVerifier.sol', async function() {
 
   it('should not allow new listing without identity claim', async function() {
     var res = await ClaimVerifier.methods
-      .checkClaim(UserIdentity._address, 3)
+      .checkClaim(UserIdentity._address, 3, await web3.eth.getBlockNumber())
       .send({ from: accounts[0] })
     assert(res.events.ClaimValid)
   })
-
 })

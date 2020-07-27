@@ -100,16 +100,10 @@ describe('Identity', async function() {
     })
 
     it('should respond to getClaim', async function() {
-      var claimId = web3.utils.soliditySha3(accounts[0], 1)
+      var claimId = web3.utils.soliditySha3(accounts[0], 1, (await web3.eth.getBlockNumber()) - 1)
       var claim = await UserIdentity.methods.getClaim(claimId).call()
       assert.equal(claim.claimType, "1")
     })
-
-    // it('should respond to isClaimValid', async function() {
-    //   var claimId = web3.utils.soliditySha3(accounts[0], 1)
-    //   var valid = await UserIdentity.methods.isClaimValid(claimId).call()
-    //   assert(valid)
-    // })
 
     it('should allow claim to be removed', async function() {
       var claimId = web3.utils.soliditySha3(accounts[0], 1)
@@ -180,10 +174,5 @@ describe('Identity', async function() {
       assert(approval.events.ClaimAdded)
       assert(approval.events.Executed)
     })
-
-    it('should allow ACTION_KEYs to approve executions')
-    it('should not allow CLAIM_SIGNER_KEYs to approve executions')
-    it('should not be able to approve an already executed execution')
-    it('should not be able to approve a non-existant execution')
   })
 })
