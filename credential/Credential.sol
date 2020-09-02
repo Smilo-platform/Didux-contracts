@@ -63,7 +63,7 @@ contract Credentials {
     * Terminate the contract
     * onlyOwner
     */
-    function terminate() public hasAccess() {
+    function terminate() public {
         _terminated = true;
         selfdestruct(_owner);
     }
