@@ -134,10 +134,20 @@ contract KeyHolder is ERC725 {
         require(keys[_key].key == _key, "No such key");
         emit KeyRemoved(keys[_key].key, keys[_key].purpose, keys[_key].keyType);
 
-        /* uint index;
-        (index,) = keysByPurpose[keys[_key].purpose.indexOf(_key);
-        keysByPurpose[keys[_key].purpose.removeByIndex(index); */
+        // Remove key by purpose
+        int index = -1;
+        bytes32[] storage keysByPurposeArray = keysByPurpose[keys[_key].purpose];
+        for (uint256 i = 0; i < keysByPurposeArray.length; i++) {
+            if (keysByPurpose[keys[_key].purpose][i] == _key) {
+                index = int(i);
+            }
+        }
+        require(index != -1, "No such key purpose");
+        keysByPurposeArray[uint(index)] = keysByPurposeArray[keysByPurposeArray.length - 1];
+        delete keysByPurposeArray[keysByPurposeArray.length - 1];
+        keysByPurposeArray.length--;
 
+        // Delete key
         delete keys[_key];
 
         return true;
